@@ -152,7 +152,7 @@ contract ERC20 is Context, ERC20, ERC20Metadata {
     string private _name;
     string private _symbol;
     
-    ///dev Mansoob: Owner variable added
+    ///dev Waqas: Owner variable added
     address tokenOwner;
     
     /**
@@ -172,7 +172,7 @@ contract ERC20 is Context, ERC20, ERC20Metadata {
         _symbol = symbol_;
     }*/
 
-    ///dev Mansoob: MODIFIED CODE OF CONSTRUCTOR
+    ///dev Waqas: MODIFIED CODE OF CONSTRUCTOR
     constructor () {
         _name = "MNC_TOKEN";
         _symbol = "MNC";
@@ -182,7 +182,7 @@ contract ERC20 is Context, ERC20, ERC20Metadata {
     }
 
 
-///dev Mansoob: Modifier to be used so that only creator could call the mint functions
+///dev Waqas: Modifier to be used so that only creator could call the mint functions
     modifier isOwner {
         if(msg.sender == tokenOwner) {
         _;
@@ -378,7 +378,7 @@ contract ERC20 is Context, ERC20, ERC20Metadata {
         emit Transfer(address(0), account, amount);
     }
     
-    ///dev Mansoob: to make the mint function public so that total supply could be increased
+    ///dev Waqas: to make the mint function public so that total supply could be increased
     
     function mint(address account, uint256 amount) public isOwner {
         _mint(account, amount);
