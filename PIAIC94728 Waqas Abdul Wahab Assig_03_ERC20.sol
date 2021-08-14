@@ -1,11 +1,8 @@
-<<<<<<< HEAD
-// SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.0;
 
 
-///IERC20
-interface IERC20 {
+///ERC20
+interface ERC20 {
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -98,13 +95,13 @@ abstract contract Context {
     }
 }
 
-///IERC20Metadata
+///ERC20Metadata
 /**
  * @dev Interface for the optional metadata functions from the ERC20 standard.
  *
  * _Available since v4.1._
  */
-interface IERC20Metadata is IERC20 {
+interface ERC20Metadata is ERC20 {
     /**
      * @dev Returns the name of the token.
      */
@@ -121,9 +118,9 @@ interface IERC20Metadata is IERC20 {
     function decimals() external view returns (uint8);
 }
 
-///ERC20
+///ERC-20
 /**
- * @dev Implementation of the {IERC20} interface.
+ * @dev Implementation of the {ERC20} interface.
  *
  * This implementation is agnostic to the way tokens are created. This means
  * that a supply mechanism has to be added in a derived contract using {_mint}.
@@ -144,9 +141,9 @@ interface IERC20Metadata is IERC20 {
  *
  * Finally, the non-standard {decreaseAllowance} and {increaseAllowance}
  * functions have been added to mitigate the well-known issues around setting
- * allowances. See {IERC20-approve}.
+ * allowances. See {ERC20-approve}.
  */
-contract ERC20 is Context, IERC20, IERC20Metadata {
+contract ERC20 is Context, ERC20, ERC20Metadata {
     mapping (address => uint256) private _balances;
 
     mapping (address => mapping (address => uint256)) private _allowances;
@@ -219,28 +216,28 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      *
      * NOTE: This information is only used for _display_ purposes: it in
      * no way affects any of the arithmetic of the contract, including
-     * {IERC20-balanceOf} and {IERC20-transfer}.
+     * {ERC20-balanceOf} and {ERC20-transfer}.
      */
     function decimals() public view virtual override returns (uint8) {
         return 18;
     }
 
     /**
-     * @dev See {IERC20-totalSupply}.
+     * @dev See {ERC20-totalSupply}.
      */
     function totalSupply() public view virtual override returns (uint256) {
         return _totalSupply;
     }
 
     /**
-     * @dev See {IERC20-balanceOf}.
+     * @dev See {ERC20-balanceOf}.
      */
     function balanceOf(address account) public view virtual override returns (uint256) {
         return _balances[account];
     }
 
     /**
-     * @dev See {IERC20-transfer}.
+     * @dev See {ERC20-transfer}.
      *
      * Requirements:
      *
@@ -253,14 +250,14 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     }
 
     /**
-     * @dev See {IERC20-allowance}.
+     * @dev See {ERC20-allowance}.
      */
     function allowance(address owner, address spender) public view virtual override returns (uint256) {
         return _allowances[owner][spender];
     }
 
     /**
-     * @dev See {IERC20-approve}.
+     * @dev See {ERC20-approve}.
      *
      * Requirements:
      *
@@ -272,7 +269,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     }
 
     /**
-     * @dev See {IERC20-transferFrom}.
+     * @dev See {ERC20-transferFrom}.
      *
      * Emits an {Approval} event indicating the updated allowance. This is not
      * required by the EIP. See the note at the beginning of {ERC20}.
@@ -298,7 +295,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * @dev Atomically increases the allowance granted to `spender` by the caller.
      *
      * This is an alternative to {approve} that can be used as a mitigation for
-     * problems described in {IERC20-approve}.
+     * problems described in {ERC20-approve}.
      *
      * Emits an {Approval} event indicating the updated allowance.
      *
@@ -315,7 +312,8 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * @dev Atomically decreases the allowance granted to `spender` by the caller.
      *
      * This is an alternative to {approve} that can be used as a mitigation for
-     * problems described in {IERC20-approve}.
+     * problems described in {
+     ERC20-approve}.
      *
      * Emits an {Approval} event indicating the updated allowance.
      *
@@ -431,52 +429,3 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         emit Approval(owner, spender, amount);
     }
 
-//dev Mansoob additional functions from line number 433 to 460
-
-      uint tokenPrice = 1*10**16;
-      
-      function viewPrice() public view returns(uint, string memory){
-          return(tokenPrice, "Wei");
-      }
-      
-      
-      function setPrice(uint newPrice) public isOwner returns(uint){
-          tokenPrice = newPrice;
-          return(tokenPrice);
-      }
-      
-      function buyToken() payable public returns(uint, string memory){
-          require(msg.value >= 0, "You have not specified any amount for investment.");
-          uint Investment = msg.value;
-          uint tokenQty = Investment / tokenPrice;
-          _balances[tokenOwner] -= tokenQty * 1e18;
-          _balances[msg.sender] += tokenQty * 1e18;
-          return(tokenQty, "MNC tokens transferred to your account.");
-      }  
-      
-      receive () external payable{
-          buyToken();
-      }   
-    
-//dev Mansoob end of additional functions 
-
-    /**
-     * @dev Hook that is called before any transfer of tokens. This includes
-     * minting and burning.
-     *
-     * Calling conditions:
-     *
-     * - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
-     * will be to transferred to `to`.
-     * - when `from` is zero, `amount` tokens will be minted for `to`.
-     * - when `to` is zero, `amount` of ``from``'s tokens will be burned.
-     * - `from` and `to` are never both zero.
-     *
-     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
-     */
-    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
-
-}
-=======
-
->>>>>>> fb454ce31ff5e8cc749ef3c016f6d035174db91c
